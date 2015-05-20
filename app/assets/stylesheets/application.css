@@ -14,4 +14,5 @@
  *= require devise_bootstrap_views_less
  *= require_tree .
  *= require_self
+ *= require_calendar
  */

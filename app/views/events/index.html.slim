@@ -1,11 +1,11 @@
-h1 Listing events
+h1 События
 
-table
+table.table.table-hover
   thead
     tr
-      th Name
-      th Start date
-      th User
+      th Название
+      th Начало
+      th Пользователь
       th
       th
       th
@@ -15,11 +15,14 @@ table
       tr
         td = event.name
         td = event.start_date
-        td = event.user
+        td = event.user.email
         td = link_to 'Show', event
         td = link_to 'Edit', edit_event_path(event)
         td = link_to 'Destroy', event, data: {:confirm => 'Are you sure?'}, :method => :delete
 
 br
 
-= link_to 'New Event', new_event_path
+= button_to '+ Добавить', new_event_path, { :method => :get, :class => 'btn btn-success' }
+
+= bootstrap_calendar Date.today {} do |date|
+  = date.day.to_s + 'a'

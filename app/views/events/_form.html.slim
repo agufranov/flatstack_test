@@ -12,7 +12,4 @@
   .field
     = f.label :start_date
     = f.datetime_select :start_date
-  .field
-    = f.label :user
-    = f.text_field :user
-  .actions = f.submit
+  .actions = f.submit 'Создать событие', :class => 'btn btn-success'
