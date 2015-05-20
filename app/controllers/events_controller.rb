@@ -26,7 +26,7 @@ class EventsController < ApplicationController
     @event.user = current_user
 
     if @event.save
-      redirect_to @event, notice: 'Event was successfully created.'
+      redirect_to events_url, notice: 'Событие создано'
     else
       render :new
     end
@@ -35,7 +35,7 @@ class EventsController < ApplicationController
   # PATCH/PUT /events/1
   def update
     if @event.update(event_params)
-      redirect_to @event, notice: 'Event was successfully updated.'
+      redirect_to events_url, notice: 'Событие сохранено'
     else
       render :edit
     end
@@ -44,7 +44,7 @@ class EventsController < ApplicationController
   # DELETE /events/1
   def destroy
     @event.destroy
-    redirect_to events_url, notice: 'Event was successfully destroyed.'
+    redirect_to events_url, notice: 'Событие удалено'
   end
 
   private
@@ -55,6 +55,6 @@ class EventsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def event_params
-      params.require(:event).permit(:name, :start_date, :user_id)
+      params.require(:event).permit(:name, :start_at, :interval, :user_id)
     end
 end

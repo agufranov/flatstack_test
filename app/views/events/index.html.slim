@@ -14,7 +14,7 @@ table.table.table-hover
     - @events.each do |event|
       tr
         td = event.name
-        td = event.start_date
+        td = event.start_at
         td = event.user.email
         td = link_to 'Show', event
         td = link_to 'Edit', edit_event_path(event)
@@ -24,5 +24,11 @@ br
 
 = button_to '+ Добавить', new_event_path, { :method => :get, :class => 'btn btn-success' }
 
-= bootstrap_calendar Date.today {} do |date|
-  = date.day.to_s + 'a'
+= bootstrap_calendar Date.today.advance(:months => params[:m].to_i) {} do |date|
+  - if date.day == 1
+    h4 = l(date, :format => '%-d %B %Y')
+  - else
+    h4 = date.day
+  - @events.each do |event|
+    - if event.start_at.in_int_span_from(date.to_datetime.in_time_zone, event.interval, true)
+      div = link_to event.name, edit_event_path(event)
