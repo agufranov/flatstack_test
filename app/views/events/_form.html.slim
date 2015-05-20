@@ -13,7 +13,9 @@
     = f.label :start_at
     = f.datetime_select :start_at
   .field
-    - Event.intervals.each do |k, v|
-      = f.label :interval, :value => k
-      = f.radio_button :interval, k
+    = f.label :interval
+    div
+      - Event.intervals.each do |k, v|
+        = f.label :interval, :value => k
+        = f.radio_button :interval, k
   .actions = f.submit 'Сохранить', :class => 'btn btn-success'

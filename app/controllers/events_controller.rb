@@ -4,7 +4,12 @@ class EventsController < ApplicationController
 
   # GET /events
   def index
-    @events = Event.all
+    if params[:my] == '1'
+      @events = current_user.events
+    else
+      @q = Event.ransack(params[:q])
+      @events = @q.result
+    end
   end
 
   # GET /events/1

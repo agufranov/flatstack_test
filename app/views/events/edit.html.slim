@@ -2,7 +2,6 @@ h1 Editing event
 
 == render 'form'
 
-= link_to 'Show', @event
-'|
-= link_to 'Back', events_path
+div = link_to 'Удалить', @event, data: {:confirm => 'Удалить событие?'}, :method => :delete
+div = link_to 'К календарю', events_path
 

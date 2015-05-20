@@ -1,0 +1,7 @@
+ru:
+  helpers:
+    label:
+      event:
+        name: 'Название'
+        start_at: 'Начало'
+        interval: 'Интервал'

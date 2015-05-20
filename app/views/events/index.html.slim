@@ -1,29 +1,13 @@
 h1 События
-
-table.table.table-hover
-  thead
-    tr
-      th Название
-      th Начало
-      th Пользователь
-      th
-      th
-      th
-
-  tbody
-    - @events.each do |event|
-      tr
-        td = event.name
-        td = event.start_at
-        td = event.user.email
-        td = link_to 'Show', event
-        td = link_to 'Edit', edit_event_path(event)
-        td = link_to 'Destroy', event, data: {:confirm => 'Are you sure?'}, :method => :delete
-
+= link_to 'Мои', events_path(params.permit(:m).merge :my => 1), :class => 'btn btn-info'
+= link_to 'Все', events_path(params.merge :my => 0), :class => 'btn btn-info'
+br
 br
 
-= button_to '+ Добавить', new_event_path, { :method => :get, :class => 'btn btn-success' }
-
+- if params[:my] != '1'
+  =  search_form_for @q do |f|
+    = f.select :user_id_eq, options_from_collection_for_select(User.all, 'id', 'email', @q.user_id_eq), { :include_blank => '- Все пользователи -' }, { :class => 'form-control', :style => 'width: 400px; display: inline;' }
+    = f.submit 'Фильтровать', :class => 'btn btn-warning'
 = bootstrap_calendar Date.today.advance(:months => params[:m].to_i) {} do |date|
   - if date.day == 1
     h4 = l(date, :format => '%-d %B %Y')
@@ -32,3 +16,6 @@ br
   - @events.each do |event|
     - if event.start_at.in_int_span_from(date.to_datetime.in_time_zone, event.interval, true)
       div = link_to event.name, edit_event_path(event)
+= link_to 'Предыдущий месяц', events_path(params.merge :m => params[:m].to_i - 1), :class => 'btn btn-info'
+= link_to 'Следующий месяц', events_path(params.merge :m => params[:m].to_i + 1), :class => 'btn btn-info'
+= button_to '+ Добавить событие', new_event_path, { :method => :get, :class => 'btn btn-success' }

@@ -33,7 +33,11 @@ module ActiveSupport
     end
 
     def span_divisible_by(d, n)
-      ((beginning_of_day - d.beginning_of_day) / 1.day) % n == 0
+      span = ((d.beginning_of_day - beginning_of_day) / 1.day)
+      span = span.to_i unless n == 1
+      puts 'SPAN:'
+      puts span
+      span % n == 0
     end
   end
 end

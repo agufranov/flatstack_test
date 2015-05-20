@@ -8,6 +8,7 @@ gem 'pg'
 gem 'therubyracer'
 gem 'devise'
 gem 'rails-i18n'
+gem 'ransack'
 
 # Frontend
 gem 'slim-rails'
@@ -28,3 +29,5 @@ group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
 end
+
+ruby "2.2.2"
