@@ -7,6 +7,7 @@ gem 'pry-rails'
 gem 'pg'
 gem 'therubyracer'
 gem 'devise'
+gem 'rails-i18n'
 
 # Frontend
 gem 'slim-rails'
